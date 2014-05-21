@@ -17,11 +17,7 @@ import java.net.SocketException;
 import java.util.List;
 import java.util.Random;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 
 /**
  *
@@ -102,7 +98,7 @@ public class Juego {
             
             registroValido = conversion.registroValido(resRegistro);
             
-            System.out.println(registroValido.getCommand());
+            System.out.println("este comando es el reg_sucess: "+registroValido.getCommand());
             
 
             System.out.println("estoy aca");
@@ -115,12 +111,12 @@ public class Juego {
             
             //System.out.println(jsonSesionStart);
             salida.writeUTF(jsonSesionStart);
-            String recSessionSucess = entrada.readLine();
+            String strRule = entrada.readLine();
             
-            //System.out.println(recSessionSucess);
+            System.out.println("comando reglas llegando"+ strRule);
             /*recibiendo reglas*/
             RULES reglas = new RULES();
-            reglas = conversion.reglas(recSessionSucess);
+            reglas = conversion.reglas(strRule);
             
           //  System.out.println(reglas.getCommand());
             
@@ -144,11 +140,9 @@ public class Juego {
             ack = conversion.acceptAck(aceptandoACKStr);
             
            // System.out.println(aceptandoACKStr);
-            
-            //if(!aceptandoACKStr.equals("\"sin definir\"")){
+
             if(!ack.getCommand().equals("ACCEPT_ACK")){
                 
-                //System.out.println("Error 2: mensaje desde GM \"sin definir\" no llego => ack no llego ");
                 System.out.println("Error 2: No llego Accept Ack");
             }
             else{
@@ -242,6 +236,14 @@ public class Juego {
                         /*Comenzando el juego*/
                         while(jugando4){
                     
+                            if(turnData.getCommand().equals("ERR_WRONG_POS")){
+                            
+                                turnData.setCommand("TURN");
+                                cantTurnos = cantTurnos-1;
+                            
+                                
+                            }
+                            else{
                             // if(jugada1 == 1 && turno == 1){
                             //  if(turno == 1 && turnData.getArguments().getAdvMove().getMove().equals("FIRST")){   
                             if(turno == 1 && cantTurnos%2 !=0){    
@@ -254,11 +256,9 @@ public class Juego {
                                 strTurn = gson.toJson(move);
                           
                           
-                                 salida.writeUTF(strTurn);
-                          //     tablero[x][y] = 1;
-                          
-                          
-                            //   jugada1 = 0;  
+                                salida.writeUTF(strTurn);
+                                cantTurnos = cantTurnos+1;
+                                
                                 }
                             else{
                     
@@ -274,21 +274,18 @@ public class Juego {
                                 strTurn = gson.toJson(move);
                           
                                 salida.writeUTF(strTurn);
-                   //           tablero[x][y] = 1;
-                        
-                    
-                            //jugada1 = 0;
+                                cantTurnos = cantTurnos+1;
                                 }
                             else{
                     
                              /*espero por nuevo turno*/
                              strTurn = entrada.readLine();
-                        
+                             //cantTurnos = cantTurnos+1;
                         
                                 }
                     
                             }
-                
+                        }
                 
                     
                     
