@@ -32,28 +32,29 @@ public class Juego {
 //reglas y características del tablero
     
     public static String id; // id asignado al cliente durante el proceso de registro
-    public static int height; // cantidad de filas del tablero (x)
-    public static int width; // cantidad de columnas del tablero (y)
-    public static int maxBoardReqs; // cant de solicitud de info del tablero por partida
-    public static boolean timedTurn =  false; // variable que indica si existe duracion máxima de tiempo para cada turno
+    //public static int height; // cantidad de filas del tablero (x)
+   // public static int width; // cantidad de columnas del tablero (y)
+    //public static int maxBoardReqs; // cant de solicitud de info del tablero por partida
+    //public static boolean timedTurn =  false; // variable que indica si existe duracion máxima de tiempo para cada turno
     public static int turnDuration; // tiempo que duran los turnos, solo si timedTurn es verdadero
-    public static boolean inmediateTurn = false;
-    public static int maxIdleTime;
+   // public static boolean inmediateTurn = false;
+    //public static int maxIdleTime;
     public static int maxRoundTime; //limite de duracion de un round
-    public static int maxMachTime; // limite absoluto de la duracion del match (0 segundos desactiva el limite)
+  //  public static int maxMachTime; // limite absoluto de la duracion del match (0 segundos desactiva el limite)
     public static int roundsPerMatch; // numero de rondas a jugar por cada enfrentamiento entre jugadores distintos
-    public static boolean noConnect3 = true; //evitar conectar 3 piezas antes que 4
-    public static boolean tournament = false; //especifica si se esta llevando a cabo un torneo
-    public static List penalizeIllegalMoves; // indica si se pueden realizar jugadas ilegales
-    public static boolean illegalMoveLose = false; //indica si el jugador perdio por realizar un movimiento ilegal
-    public static boolean wrongPosLose = false; //booleando que si un jugador perdio por colocar una pieza en una zona ya jugada con anterioridad
-    public static boolean noPass = false; //booleando que indica si un jugador puede saltarse turnos hasta maxPasses
-    public static int maxPasses; // cantidad máxima de turnos que un jugador puede pasar
-    public static boolean timeoutLose = false; //indica si existe un limite de veces que un usuario puede perder turnos por tiempo
-    public static int timeoutsForLose; // cantidad de turnos que puede perder un usuario por no ocupar el tiempo del turno
-    public static boolean enable = true;// activa o desactiva el performance
-    public static int minRounds = 10; //cantidad minima de rondas que deben completarse antes de finalizar el Match
-    public static float efficencyLimit = (float) 0.75;
+    public static int boardSize;
+    //public static boolean noConnect3 = true; //evitar conectar 3 piezas antes que 4
+    //public static boolean tournament = false; //especifica si se esta llevando a cabo un torneo
+    //public static List penalizeIllegalMoves; // indica si se pueden realizar jugadas ilegales
+    //public static boolean illegalMoveLose = false; //indica si el jugador perdio por realizar un movimiento ilegal
+    //public static boolean wrongPosLose = false; //booleando que si un jugador perdio por colocar una pieza en una zona ya jugada con anterioridad
+    //public static boolean noPass = false; //booleando que indica si un jugador puede saltarse turnos hasta maxPasses
+    //public static int maxPasses; // cantidad máxima de turnos que un jugador puede pasar
+    //public static boolean timeoutLose = false; //indica si existe un limite de veces que un usuario puede perder turnos por tiempo
+    //public static int timeoutsForLose; // cantidad de turnos que puede perder un usuario por no ocupar el tiempo del turno
+    //public static boolean enable = true;// activa o desactiva el performance
+    //public static int minRounds = 10; //cantidad minima de rondas que deben completarse antes de finalizar el Match
+    //public static float efficencyLimit = (float) 0.75;
     
     /*Tablero*/
     
@@ -99,7 +100,8 @@ public class Juego {
         nuevoRegistro = conversion.creaRegistro("Agente1", "abcdef", "IA"); // creando json de registro
         Gson gson = new Gson();
         String jsonRegistro = gson.toJson(nuevoRegistro); // creando string json
-            
+        
+        
         /*enviando registro al GM*/
         salida.writeUTF(jsonRegistro); // enviando registro al gm
         
@@ -151,26 +153,26 @@ public class Juego {
           //  System.out.println(reglas.getCommand());
             
             /*casteando reglas*/
-            
-            height = Integer.parseInt(reglas.getArguments().getBoard().getHeight());
-            width = Integer.parseInt(reglas.getArguments().getBoard().getWidth()); 
-            maxBoardReqs = Integer.parseInt(reglas.getArguments().getBoard().getMaxBoardReqs()); 
-            timedTurn = convStrABool(reglas.getArguments().getTime().getTimedTurn()); 
-            turnDuration = Integer.parseInt(reglas.getArguments().getTime().getTurnDuration()); 
-            inmediateTurn = convStrABool(reglas.getArguments().getTime().getImmediateTurn());
-            maxIdleTime = Integer.parseInt(reglas.getArguments().getTime().getMaxIdleTime());
-            maxRoundTime = Integer.parseInt(reglas.getArguments().getTime().getMaxRoundTime());
-            maxMachTime = Integer.parseInt(reglas.getArguments().getTime().getMaxMatchTime()); 
-            roundsPerMatch = Integer.parseInt(reglas.getArguments().getGame().getRoundsPerMatch()); 
-            noConnect3 = convStrABool(reglas.getArguments().getGame().getNoConnect3()); 
-            tournament = convStrABool(reglas.getArguments().getGame().getTournament()); 
-            penalizeIllegalMoves = reglas.getArguments().getGame().getPenalizeIllegalMoves(); // esto es una lista de dos elementos (cantidad de turnos fallidos y penalizacion)
-            illegalMoveLose =   convStrABool(reglas.getArguments().getGame().getIllegalMoveLose()); 
-            wrongPosLose = convStrABool(reglas.getArguments().getGame().getWrongPosLose());
-            noPass = convStrABool(reglas.getArguments().getGame().getNoPass()); 
-            maxPasses = Integer.parseInt(reglas.getArguments().getGame().getMaxPasses()); 
-            timeoutLose = convStrABool(reglas.getArguments().getGame().getTimeoutLose()); 
-            timeoutsForLose = Integer.parseInt(reglas.getArguments().getGame().getTimeoutsForLose()); 
+            boardSize = Integer.parseInt(reglas.getBoardSize());
+            //height = Integer.parseInt(reglas.getArguments().getBoard().getHeight());
+            //width = Integer.parseInt(reglas.getArguments().getBoard().getWidth()); 
+            //maxBoardReqs = Integer.parseInt(reglas.getArguments().getBoard().getMaxBoardReqs()); 
+            //timedTurn = convStrABool(reglas.getArguments().getTime().getTimedTurn()); 
+            turnDuration = Integer.parseInt(reglas.getTurnDuration()); 
+            //inmediateTurn = convStrABool(reglas.getArguments().getTime().getImmediateTurn());
+            //maxIdleTime = Integer.parseInt(reglas.getArguments().getTime().getMaxIdleTime());
+            maxRoundTime = Integer.parseInt(reglas.getMaxRoundTime());
+            //maxMachTime = Integer.parseInt(reglas.getArguments().getTime().getMaxMatchTime()); 
+            roundsPerMatch = Integer.parseInt(reglas.getRoundsPerMatch()); 
+            //noConnect3 = convStrABool(reglas.getArguments().getGame().getNoConnect3()); 
+            //tournament = convStrABool(reglas.getArguments().getGame().getTournament()); 
+            //penalizeIllegalMoves = reglas.getArguments().getGame().getPenalizeIllegalMoves(); // esto es una lista de dos elementos (cantidad de turnos fallidos y penalizacion)
+            //illegalMoveLose =   convStrABool(reglas.getArguments().getGame().getIllegalMoveLose()); 
+            //wrongPosLose = convStrABool(reglas.getArguments().getGame().getWrongPosLose());
+            //noPass = convStrABool(reglas.getArguments().getGame().getNoPass()); 
+            //maxPasses = Integer.parseInt(reglas.getArguments().getGame().getMaxPasses()); 
+            //timeoutLose = convStrABool(reglas.getArguments().getGame().getTimeoutLose()); 
+            //timeoutsForLose = Integer.parseInt(reglas.getArguments().getGame().getTimeoutsForLose()); 
           //enable = convStrABool(reglas.getArguments().getMatchEficiencyLimit().getEnabled());
           //minRounds = Integer.parseInt(reglas.getArguments().getMatchEficiencyLimit().getMinRounds()); 
         //  efficencyLimit = Float.parseFloat(reglas.getArguments().getMatchEficiencyLimit().getEfficiencyLimit());
@@ -288,8 +290,8 @@ public class Juego {
                             //  if(turno == 1 && turnData.getArguments().getAdvMove().getMove().equals("FIRST")){   
                             if(turno == 1 && cantTurnos%2 !=0){    
                          
-                                x = randomico(height);
-                                y = randomico(width);
+                                x = randomico(boardSize);
+                                y = randomico(boardSize);
                           
                                 PUT move = new PUT();
                                 move = conversion.put(x, y, id);
@@ -308,8 +310,8 @@ public class Juego {
                             if(turno==2 && cantTurnos%2==0){
                         
                         
-                                x = randomico(height);
-                                y = randomico(width);
+                                x = randomico(boardSize);
+                                y = randomico(boardSize);
                           
                                 PUT move = new PUT();
                                 move = conversion.put(x, y, id);
