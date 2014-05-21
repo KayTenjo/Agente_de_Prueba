@@ -140,13 +140,16 @@ public class Juego {
             salida.writeUTF(aceptandoStr);
             
             String aceptandoACKStr = entrada.readLine();
-           
+            ACCEPT_ACK ack = new  ACCEPT_ACK();
+            ack = conversion.acceptAck(aceptandoACKStr);
+            
            // System.out.println(aceptandoACKStr);
             
-            if(!aceptandoACKStr.equals("\"sin definir\"")){
-            
-                System.out.println("Error 2: mensaje desde GM \"sin definir\" no llego => ack no llego ");
+            //if(!aceptandoACKStr.equals("\"sin definir\"")){
+            if(!ack.getCommand().equals("ACCEPT_ACK")){
                 
+                //System.out.println("Error 2: mensaje desde GM \"sin definir\" no llego => ack no llego ");
+                System.out.println("Error 2: No llego Accept Ack");
             }
             else{
                 

@@ -52,6 +52,15 @@ public class Conversion {
     return RegSucess; 
     }
     
+    public ACCEPT_ACK  acceptAck(String strJson){
+        
+        ACCEPT_ACK ack = new ACCEPT_ACK();
+        Gson gson = new Gson();
+        ack = gson.fromJson(strJson, ack.getClass());
+        
+    return  ack;
+    }
+    
     public SESSION_START inicioSesion(String id){
     
             SESSION_START inSesion = new SESSION_START();
