@@ -5,7 +5,7 @@ import java.io.IOException;
 
 /**
  *
- * @author Kabot-Zoe
+ * @author Kerux
  */
 public class Agente {
     
@@ -13,11 +13,8 @@ public class Agente {
     public static void main(String[] args) throws IOException{
         
         Juego on = new Juego();
-       // on.jugando();
         on.aplicacion();
 
-        //Interfaz ventana = new Interfaz();
-       // ventana.setVisible(true);
             
     }
     
