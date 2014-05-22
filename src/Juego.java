@@ -244,7 +244,11 @@ public class Juego {
                         int x,y;
                         /*Comenzando el juego*/
                         while(jugando4){
-                    
+                            if(turnData.getCommand().equals("ROUND_END")){
+                                System.out.println("finalizo la partida");
+                            break;
+                            }
+                            else{
                             if(turnData.getCommand().equals("ERR_WRONG_POS")){
                             
                                 turnData.setCommand("TURN");
@@ -295,7 +299,7 @@ public class Juego {
                     
                             }
                         }
-                
+                        }
                     
                     
                 }// fin while del juego
