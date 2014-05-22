@@ -212,14 +212,7 @@ public class Juego {
                         ROUND_START roundStart = new ROUND_START();
                         roundStart = conversion.roundStart(roundStartStr);
                         
-                        if(convStrABool(roundStart.getFirstMove()) == true){
-                       
-                            turno = 1;
-                        }
-                        else{
-                
-                            turno = 2;
-                        }
+
                                 
                         ROUND_START_ACK roundSAck = new ROUND_START_ACK();
                         roundSAck = conversion.roundStartACK(id);
@@ -244,7 +237,7 @@ public class Juego {
                 
                         turnData = conversion.turno(strTurn);
                 
-                       // cantTurnos = cantTurnos+1;
+                      
                 
                         //int jugada1 = 1;
                         int x,y;
