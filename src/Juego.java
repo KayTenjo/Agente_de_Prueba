@@ -229,7 +229,15 @@ public class Juego {
                         
                         /*comienza el envio de turns*/
                 
-                        String strTurn = entrada.readLine();
+                        String strTurnOK = entrada.readLine();
+                        
+                        if(strTurnOK.equals("OK")){
+                        
+                            strTurnOK = entrada.readLine();
+                        
+                        }
+                        
+                        String strTurn = strTurnOK;
                         
                         TURN turnData = new TURN();
                         
