@@ -25,7 +25,7 @@ public class Conversion {
     
     
     }
-    
+/*    
     public String registroJson(REGISTER registro){
     
         String strJson =  "sin nada aun";
@@ -37,7 +37,7 @@ public class Conversion {
     
     return strJson;
     }
-    
+    */
     
     public REG_SUCESS registroValido(String strjson){
     
@@ -57,11 +57,11 @@ public class Conversion {
     return  ack;
     }
     
-    public SESSION_START inicioSesion(String id){
+    public SESSION_START inicioSesion(String id, String gameName){
     
             SESSION_START inSesion = new SESSION_START();
             ArgumentsSessionStart inSesionArg = new ArgumentsSessionStart();
-            inSesionArg.setGameName("Connect 4");
+            inSesionArg.setGameName(gameName);
             inSesionArg.setId(id);
             inSesion.setCommand("SESSION_START");
             inSesion.setArguments(inSesionArg);
@@ -89,15 +89,15 @@ public class Conversion {
     return acepRules;
     }
     
-    public MATCH_LOOK_UP matchLookup(String nombreAgente, String id){
+    public MATCH_LOOK_UP matchLookup(String nombreAgente, String id, String matchName, String timeOut, String advName){
     
         MATCH_LOOK_UP buscandoPartida = new MATCH_LOOK_UP();
         ArgumentsMatchLookUp matchArg = new ArgumentsMatchLookUp();
         matchArg.setAdvName(nombreAgente);
         matchArg.setId(id);
-        matchArg.setMatchName("AI");
-        matchArg.setTimeout("10");
-        matchArg.setAdvName("Agente 2");
+        matchArg.setMatchName(matchName);
+        matchArg.setTimeout(timeOut);
+        matchArg.setAdvName(advName);
         buscandoPartida.setCommand("MATCH_LOOKUP");
         buscandoPartida.setArguments(matchArg);
     

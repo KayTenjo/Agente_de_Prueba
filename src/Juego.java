@@ -80,9 +80,9 @@ public class Juego {
         
         /*enviando registro al GM*/
         salida.writeUTF(jsonRegistro); // enviando registro al gm
-        System.out.println(jsonRegistro);
+       // System.out.println(jsonRegistro);
         String resRegistro = entrada.readLine(); // recibindo respuesta
-        
+        System.out.println("Registro enviado");
        
         
         if(resRegistro.equals("{\"command\":\"ERR_UNKOWN_COMMAND\",\"arguments\":()")){
@@ -91,22 +91,31 @@ public class Juego {
         
         }
         else{
+
         /*zona de registro correcto*/
-            System.out.println(resRegistro);
+           // System.out.println(resRegistro);
             
             REG_SUCESS registroValido = new REG_SUCESS();
             
             registroValido = conversion.registroValido(resRegistro);
+       
+      if(!registroValido.getCommand().equals("REG_SUCESS")){
+        
+          System.out.println("Error 2: comando reg_sucess no llego");
+          System.out.println("respuesta del GM ante register es : "+registroValido.getCommand());
+        
+      }    
+        else{
             
-            System.out.println("este comando es el reg_sucess: "+registroValido.getCommand());
+            
             
 
-            System.out.println("estoy aca");
+            System.out.println("Registro aprobado");
             id = registroValido.getId(); // obteniendo la id enviada por el GM
             
             /*Iniciando nueva sesion*/
             SESSION_START nuevaSesion = new SESSION_START();
-            nuevaSesion = conversion.inicioSesion(id);
+            nuevaSesion = conversion.inicioSesion(id,"Connect 4");
             String jsonSesionStart = gson.toJson(nuevaSesion);
             
             //System.out.println(jsonSesionStart);
@@ -149,7 +158,7 @@ public class Juego {
                 
               /*ack de aceptacion de reglas logrado*/
                 MATCH_LOOK_UP matchUP = new MATCH_LOOK_UP();
-                matchUP = conversion.matchLookup(nombreAgente, id);
+                matchUP = conversion.matchLookup(nombreAgente, id,"AI","10","Agente 2");
                 String matchUPStr = gson.toJson(matchUP);
                 
                // System.out.println(matchUPStr);
@@ -297,6 +306,7 @@ public class Juego {
                 } // match lock up ok
                 
             } // ACK aceptado (mensaje sin definir desde GM)
+        }
         }// comando invalido en inicio de registro
     }
    
