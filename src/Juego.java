@@ -201,7 +201,7 @@ public class Juego {
                     
                     String OK = entrada.readLine(); // donde recibo un ok
                     
-                    if(OK.equals("OK")){
+                    if(OK.equals("{\"command\":\"OK\"}")){
                     
                         OK = entrada.readLine();
                     
@@ -212,7 +212,7 @@ public class Juego {
                         ROUND_START roundStart = new ROUND_START();
                         roundStart = conversion.roundStart(roundStartStr);
                         
-                        if(convStrABool(roundStart.getFirstMove())==true){
+                        if(convStrABool(roundStart.getFirstMove()) == true){
                        
                             turno = 1;
                         }

@@ -9,7 +9,6 @@ public class ROUND_START{
    	private String advColor;
    	private String color;
    	private String firstMove;
-   	private String initialBoard;
 
  	public String getCommand(){
 		return this.command;
@@ -36,10 +35,5 @@ public class ROUND_START{
 	public void setFirstMove(String firstMove){
 		this.firstMove = firstMove;
 	}
- 	public String getInitialBoard(){
-		return this.initialBoard;
-	}
-	public void setInitialBoard(String initialBoard){
-		this.initialBoard = initialBoard;
-	}
+
 }
