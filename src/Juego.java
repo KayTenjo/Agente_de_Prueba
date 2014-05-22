@@ -250,13 +250,13 @@ public class Juego {
                         int x,y;
                         /*Comenzando el juego*/
                         while(jugando4){
-                          /*
+                          
                             if(turnData.getCommand().equals("ROUND_END")){
                                 break;
                             }
                             else{
                             
-                            if(turnData.getCommand().equals("TURN")){
+                            if(turnData.getCommand().equals(ack)){
                             
                             }
                             else{
@@ -264,7 +264,7 @@ public class Juego {
                             
                             
                             }
-                            */
+                            
                             }
                             
                     
