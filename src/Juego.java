@@ -250,70 +250,27 @@ public class Juego {
                         int x,y;
                         /*Comenzando el juego*/
                         while(jugando4){
+                          /*
                             if(turnData.getCommand().equals("ROUND_END")){
-                                System.out.println("finalizo la partida");
-                            break;
+                                break;
                             }
                             else{
-                            if(turnData.getCommand().equals("ERR_WRONG_POS")){
                             
-                                turnData.setCommand("TURN");
-                                cantTurnos = cantTurnos-1;
+                            if(turnData.getCommand().equals("TURN")){
                             
-                                
                             }
                             else{
-                            // if(jugada1 == 1 && turno == 1){
-                            //  if(turno == 1 && turnData.getArguments().getAdvMove().getMove().equals("FIRST")){   
-                            if(turno == 1 && cantTurnos%2 !=0){    
-                         
-                                x = randomico(boardSize);
-                                y = randomico(boardSize);
-                          
-                                PUT move = new PUT();
-                                move = conversion.put(x, y, id);
-                                strTurn = gson.toJson(move);
-                          
-                          
-                                salida.writeUTF(strTurn);
-                                cantTurnos = cantTurnos+1;
-                                
-                                }
-                            else{
-                    
-                            //if(turno == 2 && turnData.getArguments().getAdvMove().getMove().equals("WAIT") ){
-                            if(turno==2 && cantTurnos%2==0){
-                        
-                        
-                                x = randomico(boardSize);
-                                y = randomico(boardSize);
-                          
-                                PUT move = new PUT();
-                                move = conversion.put(x, y, id);
-                                strTurn = gson.toJson(move);
-                          
-                                salida.writeUTF(strTurn);
-                                cantTurnos = cantTurnos+1;
-                                }
-                            else{
-                    
-                             /*espero por nuevo turno*/
-                             strTurn = entrada.readLine();
-                             //cantTurnos = cantTurnos+1;
-                        
-                                }
-                    
+                            
+                            
+                            
                             }
-                        }
-                        }
+                            */
+                            }
+                            
                     
                     
-                }// fin while del juego
+                         }// fin while del juego
                         
-                    
-                   // } // recepcion del ok después del match Ready
-                    
-               // } // match lock up ok
                 
             } // ACK aceptado (mensaje sin definir desde GM)
         }
@@ -321,10 +278,10 @@ public class Juego {
     }
    
     public boolean convStrABool(String x){
-    if(x.equals("true")){
+        if(x.equals("true")){
     
         return true;
-    }
+        }
         
     return false;
     }
@@ -344,7 +301,7 @@ public class Juego {
                 m[x][y]=0;
             }
         
-        }
+    }
         
     return m;//To change body of generated methods, choose Tools | Templates.
     }

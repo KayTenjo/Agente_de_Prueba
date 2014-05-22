@@ -6,8 +6,12 @@ import java.util.List;
 public class TURN{
 
    	private String command;
-   	private AdvMove advMove;
-   	private String remainingRoundTime;
+        private String yourTurn;
+        private String move;
+        private String xPos;
+        private String yPos;
+   	
+   	
 
  	public String getCommand(){
 		return this.command;
@@ -15,19 +19,42 @@ public class TURN{
 	public void setCommand(String command){
 		this.command = command;
 	}
+        public void setYourTurn(String yourTurn){
+            
+            this.yourTurn = yourTurn;
+        }
+        public String getYourTurn(){
         
-        public AdvMove getAdvMove(){
-		return this.advMove;
-	}
-	public void setAdvMove(AdvMove advMove){
-		this.advMove = advMove;
-	}
- 	public String getRemainingRoundTime(){
-		return this.remainingRoundTime;
-	}
-	public void setRemainingRoundTime(String remainingRoundTime){
-		this.remainingRoundTime = remainingRoundTime;
-	}
+            return this.yourTurn;
         
+        }
+        public void setxPos(String x){
+        
+        this.xPos=x;
+        
+        }
+        public void setMove(String move){
+        
+            this.move = move;
+        }
+        
+        public String getMove(){
+        
+            return this.move;
+        }
+        
+        public String getxPos(){
+        
+        return this.xPos;
+        
+        }
+        public void setyPos(String yPos){
+        
+            this.yPos = yPos;
+        }
+        public String getyPos(){
+        
+            return this.yPos;
+        }
         
 }
