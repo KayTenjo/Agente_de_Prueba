@@ -244,24 +244,50 @@ public class Juego {
                 
                         turnData = conversion.turno(strTurn);
                 
-                        cantTurnos = cantTurnos+1;
+                       // cantTurnos = cantTurnos+1;
                 
                         //int jugada1 = 1;
                         int x,y;
                         /*Comenzando el juego*/
                         while(jugando4){
                           
+                            turnData = conversion.turno(strTurn);
+                            
                             if(turnData.getCommand().equals("ROUND_END")){
                                 break;
                             }
                             else{
                             
-                            if(turnData.getCommand().equals(ack)){
+                            if(turnData.getCommand().equals("TURN")&&convStrABool(turnData.getYourTurn())== true){
                             
+                                x = randomico(boardSize);
+                                y = randomico(boardSize);
+                          
+                                PUT move = new PUT();
+                                move = conversion.put(x, y, id);
+                                strTurn = gson.toJson(move);
+                                
+                                salida.writeUTF(strTurn);
+                                
+                                strTurn = entrada.readLine();
+                                turnData = conversion.turno(strTurn);
+                                
+                                while(turnData.getCommand().equals("ERR_WRONG_POS")){
+                                   
+                                move = conversion.put(x, y, id);
+                                strTurn = gson.toJson(move);
+                                
+                                salida.writeUTF(strTurn);
+                                
+                                strTurn = entrada.readLine();
+                                turnData = conversion.turno(strTurn);
+                                
+                                }
+                                
                             }
                             else{
                             
-                            
+                            strTurn = entrada.readLine();
                             
                             }
                             
