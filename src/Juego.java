@@ -58,9 +58,7 @@ public class Juego {
         /*creamos las variables necesatias para la comunicacion*/
         
         Socket socket = new Socket("localhost",7075);
-    
         DataOutputStream salida = new DataOutputStream(socket.getOutputStream());
-
         BufferedReader  entrada = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         
           
@@ -107,9 +105,6 @@ public class Juego {
       }    
         else{
             
-            
-            
-
             System.out.println("Registro aprobado");
             id = registroValido.getId(); // obteniendo la id enviada por el GM
             
@@ -192,6 +187,8 @@ public class Juego {
                     idAdversario = matchNotify.getAdvId(); // id del adversario actual
                     nombrePartida = matchNotify.getMatchName(); // nombre de la partida actual
                 
+                    while(true){
+                        
                     /*enviando aceptacion de match*/
                     MATCH_READY iniciando = new MATCH_READY();
                     iniciando = conversion.matchListo(id);
@@ -203,8 +200,10 @@ public class Juego {
                     
                     TURN oks = new TURN();
                     oks = conversion.turno(OK);
+
                      System.out.println("el comando que muere es "+ oks.getCommand());          
                      if(oks.getCommand().equals("OK")){
+
                     
                         OK = entrada.readLine();
                     
@@ -214,9 +213,7 @@ public class Juego {
                         
                         ROUND_START roundStart = new ROUND_START();
                         roundStart = conversion.roundStart(roundStartStr);
-                        
-
-                                
+                              
                         ROUND_START_ACK roundSAck = new ROUND_START_ACK();
                         roundSAck = conversion.roundStartACK(id);
                         String rsAckStr = gson.toJson(roundSAck);
@@ -225,8 +222,7 @@ public class Juego {
                         
                         /*comienza el envio de turns*/
                 
-                        String strTurnOK = entrada.readLine();
-                        
+                        String strTurnOK = entrada.readLine();                        
                         oks = conversion.turno(strTurnOK);
                         
                         if(oks.getCommand().equals("OK")){
@@ -234,20 +230,11 @@ public class Juego {
                             strTurnOK = entrada.readLine();
                         
                         }
-                        
-                         
-                        
-                        
-                        
-                        String strTurn = strTurnOK;
-                        
+   
+                        String strTurn = strTurnOK;                      
                         TURN turnData = new TURN();
-                        
-                
                         turnData = conversion.turno(strTurn);
-                
-                      
-                
+
                         //int jugada1 = 1;
                         
                         ////Comenzando el juego/////
@@ -288,6 +275,12 @@ public class Juego {
                                 y = randomico(boardSize);
                                 System.out.println("X es " + x);
                                 System.out.println("Y es " + y);
+
+                                while(turnData.getCommand().equals("ERR_WRONG_POS")){
+                                
+                                x = randomico(boardSize);
+                                y = randomico(boardSize);
+                                    
                                 move = conversion.put(x, y, id);
                                 strTurn = gson.toJson(move);
                                 
@@ -306,7 +299,16 @@ public class Juego {
                     
                          }// fin while del juego
                         
+
                  
+                        ROUND_END fin = new ROUND_END();
+                        fin = conversion.roundEnd(strTurn);
+                        if(fin.getCommand().equals("ROUND_END")&& convStrABool(fin.getNextGame())== false){
+                            break;
+                        }
+                        
+            }//para multiples matches   
+
             } // ACK aceptado (mensaje sin definir desde GM)
         }
         }// comando invalido en inicio de registro
