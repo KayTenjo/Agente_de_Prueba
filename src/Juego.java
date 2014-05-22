@@ -39,8 +39,8 @@ public class Juego {
     
     /*Nombre y características del Agente*/
     
-    public static String nombreAgente = "Agente 1";
-    public static String passAgente = "TresTristesTigres";
+    public static String nombreAgente = "Agente 2";
+    public static String passAgente = "Tdsfasdfasdfsafdfas";
     public static String tipoAgente = "IA";
     public static int turno = 3;//1 = primero, 2 = segundo, 3 = aun no asignado (no es necesario el 3 pero se quedara así mientras).
     
@@ -73,7 +73,7 @@ public class Juego {
         /*iniciando nuevo registro*/
         
         REGISTER nuevoRegistro = new REGISTER();
-        nuevoRegistro = conversion.creaRegistro("Agente1", "abcdef", "IA"); // creando json de registro
+        nuevoRegistro = conversion.creaRegistro("Agente1", "asdfasdfasdfasdfasfs", "IA"); // creando json de registro
         Gson gson = new Gson();
         String jsonRegistro = gson.toJson(nuevoRegistro); // creando string json
         
@@ -173,14 +173,14 @@ public class Juego {
                 RULES msjMatchOK = new RULES();
                 msjMatchOK = conversion.reglas(matchOK);
                 
-               
+                System.out.println(msjMatchOK.getCommand());
                 if(msjMatchOK.getCommand().equals("MATCH_LOOKUP_OK")){
-                
+                    System.out.println("Entre al match look up ok");
                     matchOK = entrada.readLine();
-
+                    System.out.println("estoyp or salir del  match look up ok");
                 }
                
-                    
+                    System.out.println("sali del  match look up ok");
                     /*iniciando proceso de notificacion (Match Notify)*/
 
                     String notifys = matchOK;
@@ -203,8 +203,8 @@ public class Juego {
                     
                     TURN oks = new TURN();
                     oks = conversion.turno(OK);
-                            
-                    if(oks.equals("OK")){
+                     System.out.println("el comando que muere es "+ oks.getCommand());          
+                     if(oks.getCommand().equals("OK")){
                     
                         OK = entrada.readLine();
                     
@@ -249,33 +249,45 @@ public class Juego {
                       
                 
                         //int jugada1 = 1;
-                        int x,y;
-                        /*Comenzando el juego*/
+                        
+                        ////Comenzando el juego/////
                         while(jugando4){
-                          
-                            turnData = conversion.turno(strTurn);
                             
+                
+                            turnData = conversion.turno(strTurn);
+                            System.out.println(turnData.getCommand());
                             if(turnData.getCommand().equals("ROUND_END")){
+                                System.out.println("Roun end yey!");
                                 break;
                             }
                             else{
+                           //convStrABool(turnData.getYourTurn())== true)
+                            if((turnData.getCommand().equals("TURN")&& turnData.getYourTurn().equals("true"))|| turnData.getCommand().equals("ERR_WRONG_POS")){
                             
-                            if(turnData.getCommand().equals("TURN")&&convStrABool(turnData.getYourTurn())== true){
-                            
-                                x = randomico(boardSize);
-                                y = randomico(boardSize);
-                          
+                                 
+                                Random rand = new Random();
+
+                                int x= rand.nextInt(boardSize)+1;
+                                int y= rand.nextInt(boardSize)+1;
+                                //x=x-1;
+                                //y=y-1;
+                                System.out.println("X es " + x);
+                                System.out.println("Y es " + y);
                                 PUT move = new PUT();
                                 move = conversion.put(x, y, id);
                                 strTurn = gson.toJson(move);
                                 
                                 salida.writeUTF(strTurn);
                                 
-                                strTurn = entrada.readLine();
-                                turnData = conversion.turno(strTurn);
+                               // strTurn = entrada.readLine();
+                               // turnData = conversion.turno(strTurn);
                                 
-                                while(turnData.getCommand().equals("ERR_WRONG_POS")){
-                                   
+                               /* while(turnData.getCommand().equals("ERR_WRONG_POS")){
+                                
+                                x = randomico(boardSize);
+                                y = randomico(boardSize);
+                                System.out.println("X es " + x);
+                                System.out.println("Y es " + y);
                                 move = conversion.put(x, y, id);
                                 strTurn = gson.toJson(move);
                                 
@@ -283,23 +295,18 @@ public class Juego {
                                 
                                 strTurn = entrada.readLine();
                                 turnData = conversion.turno(strTurn);
-                                
+                                */
                                 }
                                 
                             }
-                            else{
-                            
-                            strTurn = entrada.readLine();
-                            
-                            }
-                            
-                            }
-                            
-                    
+                           
+                        strTurn = entrada.readLine();
+                        
+                        
                     
                          }// fin while del juego
                         
-                
+                 
             } // ACK aceptado (mensaje sin definir desde GM)
         }
         }// comando invalido en inicio de registro
