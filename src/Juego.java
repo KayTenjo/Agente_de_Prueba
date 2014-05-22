@@ -167,23 +167,23 @@ public class Juego {
                 
                 String matchOK = entrada.readLine();
                 
-              //  System.out.println(matchOK);
+                //System.out.println("Esta llegando un " + matchOK + "antes del matchLookUp ");
                 
                 /*match Look UP OK*/
                 RULES msjMatchOK = new RULES();
                 msjMatchOK = conversion.reglas(matchOK);
                 
                
-                if(!msjMatchOK.getCommand().equals("MATCH_LOOKUP_OK")){
+                if(msjMatchOK.getCommand().equals("MATCH_LOOKUP_OK")){
                 
-                    System.out.println("Error 3: se esta repitiendo el proceso de matchLookup\n o hubo un error en el envio del comando");
-                    
+                    matchOK = entrada.readLine();
+
                 }
-                else{
+               
                     
                     /*iniciando proceso de notificacion (Match Notify)*/
 
-                    String notifys = entrada.readLine();
+                    String notifys = matchOK;
                     MATCH_NOTIFY matchNotify = new MATCH_NOTIFY();
                     matchNotify = conversion.notificacion(notifys);
                     
@@ -201,15 +201,13 @@ public class Juego {
                     
                     String OK = entrada.readLine(); // donde recibo un ok
                     
-                    if(!OK.equals("OK")){
+                    if(OK.equals("OK")){
                     
-                    System.out.println("Error 4: Ok no recibido");
+                        OK = entrada.readLine();
+                    
                     }
-                    else{
-                    
-                    /*Comienzo del match*/
-                        
-                        String roundStartStr = entrada.readLine();
+
+                        String roundStartStr = OK;
                         
                         ROUND_START roundStart = new ROUND_START();
                         roundStart = conversion.roundStart(roundStartStr);
@@ -305,9 +303,9 @@ public class Juego {
                 }// fin while del juego
                         
                     
-                    } // recepcion del ok después del match Ready
+                   // } // recepcion del ok después del match Ready
                     
-                } // match lock up ok
+               // } // match lock up ok
                 
             } // ACK aceptado (mensaje sin definir desde GM)
         }
