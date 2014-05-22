@@ -179,7 +179,15 @@ public class Conversion {
     
     return errWrong;
     }
-            
+           
+    public ROUND_END roundEnd(String strRoundEnd){
+        ROUND_END fin = new ROUND_END();
+        Gson gson = new Gson();
+        fin = gson.fromJson(strRoundEnd, fin.getClass());
+                
+    
+    return fin;
+    }
             
             
             }

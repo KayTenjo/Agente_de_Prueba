@@ -3,11 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Kay/Documents/GitHub/Agente_de_Prueba/src/ComandosAgente/REG_SUCESS.java</file>
-            <file>file:/C:/Users/Kay/Documents/GitHub/Agente_de_Prueba/src/ComandosAgente/ArgumentsSessionStart.java</file>
-            <file>file:/C:/Users/Kay/Documents/GitHub/Agente_de_Prueba/src/ComandosAgente/SESSION_START.java</file>
-            <file>file:/C:/Users/Kay/Documents/GitHub/Agente_de_Prueba/src/Juego.java</file>
-            <file>file:/C:/Users/Kay/Documents/GitHub/Agente_de_Prueba/src/ComandosAgente/REGISTER.java</file>
+            <file>file:/C:/Users/Kabot-Zoe/Documents/GitHub/Agente_de_Prueba/src/ComandosAgente/ROUND_START.java</file>
+            <file>file:/C:/Users/Kabot-Zoe/Documents/GitHub/Agente_de_Prueba/src/ComandosAgente/TURN.java</file>
+            <file>file:/C:/Users/Kabot-Zoe/Documents/GitHub/Agente_de_Prueba/src/Conversion.java</file>
+            <file>file:/C:/Users/Kabot-Zoe/Documents/GitHub/Agente_de_Prueba/src/Juego.java</file>
+            <file>file:/C:/Users/Kabot-Zoe/Documents/GitHub/Agente_de_Prueba/src/Agente.java</file>
         </group>
     </open-files>
 </project-private>
