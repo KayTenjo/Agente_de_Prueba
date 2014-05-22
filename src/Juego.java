@@ -201,7 +201,10 @@ public class Juego {
                     
                     String OK = entrada.readLine(); // donde recibo un ok
                     
-                    if(OK.equals("{\"command\":\"OK\"}")){
+                    TURN oks = new TURN();
+                    oks = conversion.turno(OK);
+                            
+                    if(oks.equals("OK")){
                     
                         OK = entrada.readLine();
                     
@@ -224,11 +227,17 @@ public class Juego {
                 
                         String strTurnOK = entrada.readLine();
                         
-                        if(strTurnOK.equals("OK")){
+                        oks = conversion.turno(strTurnOK);
+                        
+                        if(oks.getCommand().equals("OK")){
                         
                             strTurnOK = entrada.readLine();
                         
                         }
+                        
+                         
+                        
+                        
                         
                         String strTurn = strTurnOK;
                         
