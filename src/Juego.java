@@ -48,8 +48,8 @@ public class Juego {
     public static String nombreAdversario;
     public static String idAdversario;
     public static String nombrePartida;
-    
-    public static float cantTurnos = 0;
+    public static boolean condicionante;
+    public static float cantMatches;
     
     
     
@@ -71,7 +71,7 @@ public class Juego {
         /*iniciando nuevo registro*/
         
         REGISTER nuevoRegistro = new REGISTER();
-        nuevoRegistro = conversion.creaRegistro("Agente1", "asdfasdfasdfasdfasfs", "IA"); // creando json de registro
+        nuevoRegistro = conversion.creaRegistro("Agente1", "agente", "IA"); // creando json de registro
         Gson gson = new Gson();
         String jsonRegistro = gson.toJson(nuevoRegistro); // creando string json
         
@@ -150,7 +150,9 @@ public class Juego {
                 System.out.println("Error 2: No llego Accept Ack");
             }
             else{
-                
+               // condicionante = true;
+                cantMatches = 10;
+                while(cantMatches > 0){
               /*ack de aceptacion de reglas logrado*/
                 MATCH_LOOK_UP matchUP = new MATCH_LOOK_UP();
                 matchUP = conversion.matchLookup(nombreAgente, id,"AI","10","Agente 2");
@@ -187,7 +189,7 @@ public class Juego {
                     idAdversario = matchNotify.getAdvId(); // id del adversario actual
                     nombrePartida = matchNotify.getMatchName(); // nombre de la partida actual
                 
-                    while(true){
+                    
                         
                     /*enviando aceptacion de match*/
                     MATCH_READY iniciando = new MATCH_READY();
@@ -213,7 +215,8 @@ public class Juego {
                         
                         ROUND_START roundStart = new ROUND_START();
                         roundStart = conversion.roundStart(roundStartStr);
-                              
+                    
+                        while(true){
                         ROUND_START_ACK roundSAck = new ROUND_START_ACK();
                         roundSAck = conversion.roundStartACK(id);
                         String rsAckStr = gson.toJson(roundSAck);
@@ -230,7 +233,7 @@ public class Juego {
                             strTurnOK = entrada.readLine();
                         
                         }
-   
+                        int x,y;
                         String strTurn = strTurnOK;                      
                         TURN turnData = new TURN();
                         turnData = conversion.turno(strTurn);
@@ -252,10 +255,10 @@ public class Juego {
                             if((turnData.getCommand().equals("TURN")&& turnData.getYourTurn().equals("true"))|| turnData.getCommand().equals("ERR_WRONG_POS")){
                             
                                  
-                                Random rand = new Random();
+                                
 
-                                int x= rand.nextInt(boardSize)+1;
-                                int y= rand.nextInt(boardSize)+1;
+                                x= randomico(boardSize+5)+1;
+                                y = randomico(boardSize+5)+1;
                                 //x=x-1;
                                 //y=y-1;
                                 System.out.println("X es " + x);
@@ -307,8 +310,12 @@ public class Juego {
                             break;
                         }
                         
-            }//para multiples matches   
 
+            }//para multiples matches 
+                    
+               cantMatches = cantMatches-1;     
+            }
+                System.out.println("Sali de todos los matches programados");
             } // ACK aceptado (mensaje sin definir desde GM)
         }
         }// comando invalido en inicio de registro
